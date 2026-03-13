@@ -12,7 +12,7 @@
     <!-- NAVBAR -->
     <nav id="navbar">
         <a class="logo" href="#">
-            <div class="logo-icon">M</div>
+            <!-- <div class="logo-icon">M</div> -->
             <div class="logo-text">
                 <div class="brand">MAR<span>CA</span> &amp; MEDIOS</div>
                 <div class="sub">Publicidad · Eventos</div>
@@ -26,36 +26,6 @@
         </div>
         <a href="#cotizar" class="nav-cta" style="margin-left:auto">Cotizar ahora</a>
     </nav>
-
-    <!-- TICKER -->
-    <div class="ticker-wrap">
-        <div class="ticker-track" id="ticker">
-            <span class="ticker-item">Stands en Cartagena</span>
-            <span class="ticker-item ticker-dot">●</span>
-            <span class="ticker-item">Diseños a tu medida</span>
-            <span class="ticker-item ticker-dot">●</span>
-            <span class="ticker-item">Stands en Barranquilla</span>
-            <span class="ticker-item ticker-dot">●</span>
-            <span class="ticker-item">Alta personalización</span>
-            <span class="ticker-item ticker-dot">●</span>
-            <span class="ticker-item">Montaje profesional</span>
-            <span class="ticker-item ticker-dot">●</span>
-            <span class="ticker-item">+600 marcas atendidas</span>
-            <span class="ticker-item ticker-dot">●</span>
-            <span class="ticker-item">Stands en Cartagena</span>
-            <span class="ticker-item ticker-dot">●</span>
-            <span class="ticker-item">Diseños a tu medida</span>
-            <span class="ticker-item ticker-dot">●</span>
-            <span class="ticker-item">Stands en Barranquilla</span>
-            <span class="ticker-item ticker-dot">●</span>
-            <span class="ticker-item">Alta personalización</span>
-            <span class="ticker-item ticker-dot">●</span>
-            <span class="ticker-item">Montaje profesional</span>
-            <span class="ticker-item ticker-dot">●</span>
-            <span class="ticker-item">+600 marcas atendidas</span>
-            <span class="ticker-item ticker-dot">●</span>
-        </div>
-    </div>
 
     <!-- HERO -->
     <section class="hero">
@@ -168,8 +138,8 @@
 
         <div class="tabs-nav reveal delay-1" id="tabsNav">
             <div class="tab-slider" id="tabSlider"></div>
-            <button class="tab-btn active" data-tab="cartagena" onclick="switchTab('cartagena', this)">📍 Cartagena de Indias</button>
-            <button class="tab-btn" data-tab="barranquilla" onclick="switchTab('barranquilla', this)">📍 Barranquilla</button>
+            <button class="tab-btn active" data-tab="cartagena" onclick="switchTab('cartagena', this)">Cartagena de Indias</button>
+            <button class="tab-btn" data-tab="barranquilla" onclick="switchTab('barranquilla', this)">Barranquilla</button>
         </div>
 
         <!-- TAB CARTAGENA -->
@@ -242,7 +212,7 @@
                 <div class="products-grid">
                     <div class="product-card">
                         <div class="product-img">
-                            <img src="https://via.placeholder.com/400x300/1a2035/f05a1a?text=Stand+Isla" alt="Stand Tipo Isla" onerror="this.src=''" />
+                            <img src="./public/images/stan1.jpg" alt="Stand Tipo Isla" onerror="this.src=''" />
                             <div class="product-overlay"><a href="#cotizar" class="overlay-btn">Cotizar <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                         <path d="m9 18 6-6-6-6" />
                                     </svg></a></div>
@@ -255,7 +225,7 @@
                     </div>
                     <div class="product-card">
                         <div class="product-img">
-                            <img src="https://via.placeholder.com/400x300/1a2035/f05a1a?text=Stand+L+U" alt="Stand Tipo L y U" onerror="this.src=''" />
+                            <img src="./public/images/stan2.jpg" alt="Stand Tipo L y U" onerror="this.src=''" />
                             <div class="product-overlay"><a href="#cotizar" class="overlay-btn">Cotizar <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                         <path d="m9 18 6-6-6-6" />
                                     </svg></a></div>
@@ -268,7 +238,7 @@
                     </div>
                     <div class="product-card">
                         <div class="product-img">
-                            <img src="https://via.placeholder.com/400x300/1a2035/f05a1a?text=Isla+Esquinero" alt="Stand Isla Esquinero" onerror="this.src=''" />
+                            <img src="./public/images/stan3.jpg" alt="Stand Isla Esquinero" onerror="this.src=''" />
                             <div class="product-overlay"><a href="#cotizar" class="overlay-btn">Cotizar <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                         <path d="m9 18 6-6-6-6" />
                                     </svg></a></div>
@@ -281,7 +251,7 @@
                     </div>
                     <div class="product-card">
                         <div class="product-img">
-                            <img src="https://via.placeholder.com/400x300/1a2035/f05a1a?text=Stand+U" alt="Stand Tipo U" onerror="this.src=''" />
+                            <img src="./public/images/stan4.jpg" alt="Stand Tipo U" onerror="this.src=''" />
                             <div class="product-overlay"><a href="#cotizar" class="overlay-btn">Cotizar <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                         <path d="m9 18 6-6-6-6" />
                                     </svg></a></div>
@@ -366,7 +336,7 @@
                 <div class="products-grid">
                     <div class="product-card">
                         <div class="product-img" style="background:linear-gradient(135deg,#0a1530,#0e1520)">
-                            <img src="" alt="Stand Modular BQ" onerror="this.style.display='none'" />
+                            <img src="./public/images/stan5.jpg" alt="Stand Modular BQ" onerror="this.style.display='none'" />
                             <div class="product-overlay"><a href="#cotizar" class="overlay-btn" style="background:#1a3aff">Cotizar</a></div>
                         </div>
                         <div class="product-info">
@@ -377,7 +347,7 @@
                     </div>
                     <div class="product-card">
                         <div class="product-img" style="background:linear-gradient(135deg,#0a1530,#0e1520)">
-                            <img src="" alt="Stand Isla BQ" onerror="this.style.display='none'" />
+                            <img src="./public/images/stan6.jpg" alt="Stand Isla BQ" onerror="this.style.display='none'" />
                             <div class="product-overlay"><a href="#cotizar" class="overlay-btn" style="background:#1a3aff">Cotizar</a></div>
                         </div>
                         <div class="product-info">
@@ -388,7 +358,7 @@
                     </div>
                     <div class="product-card">
                         <div class="product-img" style="background:linear-gradient(135deg,#0a1530,#0e1520)">
-                            <img src="" alt="Stand Premium BQ" onerror="this.style.display='none'" />
+                            <img src="./public/images/stan7.jpeg" alt="Stand Premium BQ" onerror="this.style.display='none'" />
                             <div class="product-overlay"><a href="#cotizar" class="overlay-btn" style="background:#1a3aff">Cotizar</a></div>
                         </div>
                         <div class="product-info">
@@ -399,7 +369,7 @@
                     </div>
                     <div class="product-card">
                         <div class="product-img" style="background:linear-gradient(135deg,#0a1530,#0e1520)">
-                            <img src="" alt="Stand Alquiler BQ" onerror="this.style.display='none'" />
+                            <img src="./public/images/stan8.jpeg" alt="Stand Alquiler BQ" onerror="this.style.display='none'" />
                             <div class="product-overlay"><a href="#cotizar" class="overlay-btn" style="background:#1a3aff">Cotizar</a></div>
                         </div>
                         <div class="product-info">
@@ -412,6 +382,36 @@
             </div>
         </div>
     </section>
+
+    <!-- TICKER -->
+    <div class="ticker-wrap">
+        <div class="ticker-track" id="ticker">
+            <span class="ticker-item">Stands en Cartagena</span>
+            <span class="ticker-item ticker-dot">●</span>
+            <span class="ticker-item">Diseños a tu medida</span>
+            <span class="ticker-item ticker-dot">●</span>
+            <span class="ticker-item">Stands en Barranquilla</span>
+            <span class="ticker-item ticker-dot">●</span>
+            <span class="ticker-item">Alta personalización</span>
+            <span class="ticker-item ticker-dot">●</span>
+            <span class="ticker-item">Montaje profesional</span>
+            <span class="ticker-item ticker-dot">●</span>
+            <span class="ticker-item">+600 marcas atendidas</span>
+            <span class="ticker-item ticker-dot">●</span>
+            <span class="ticker-item">Stands en Cartagena</span>
+            <span class="ticker-item ticker-dot">●</span>
+            <span class="ticker-item">Diseños a tu medida</span>
+            <span class="ticker-item ticker-dot">●</span>
+            <span class="ticker-item">Stands en Barranquilla</span>
+            <span class="ticker-item ticker-dot">●</span>
+            <span class="ticker-item">Alta personalización</span>
+            <span class="ticker-item ticker-dot">●</span>
+            <span class="ticker-item">Montaje profesional</span>
+            <span class="ticker-item ticker-dot">●</span>
+            <span class="ticker-item">+600 marcas atendidas</span>
+            <span class="ticker-item ticker-dot">●</span>
+        </div>
+    </div>
 
     <!-- PROCESO -->
     <section class="process-section" id="proceso">
@@ -599,7 +599,7 @@
             <div class="cta-sub">Solicita tu cotización hoy y recibe tu diseño 3D sin compromiso.</div>
         </div>
         <div class="cta-actions">
-            <a href="https://wa.me/573206926909" class="btn-primary" target="_blank">
+            <a href="https://wa.me/573103716894" class="btn-primary" target="_blank">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
                 </svg>
@@ -614,7 +614,7 @@
         <div class="footer-top">
             <div class="footer-brand">
                 <a class="logo" href="#" style="margin-bottom:16px; display:inline-flex">
-                    <div class="logo-icon">M</div>
+                    <!-- <div class="logo-icon">M</div> -->
                     <div class="logo-text">
                         <div class="brand">MAR<span>CA</span> &amp; MEDIOS</div>
                         <div class="sub">Publicidad · Eventos</div>
@@ -657,7 +657,9 @@
                                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                                 <polyline points="22,6 12,13 2,6" />
                             </svg>
-                            <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5831363e37183e283d3c2a392239763b37">[email&#160;protected]</a>
+                            <a href="mailto:standsCartagena.web@gmail.com" class="email-link">
+                                standsCartagena.web@gmail.com
+                            </a>
                         </div>
                         <div class="contact-line">
                             <svg viewBox="0 0 24 24">
@@ -665,14 +667,19 @@
                                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                             </svg>
-                            @Fpedrazav
+                            @StandsCartagena
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>Copyright © 2024 · Marca & Medios. Todos los derechos reservados.</p>
+            <p>
+                © 2026 Stands Cartagena | Desarrollo Web
+                <a class="cc" href="https://davidlopez09.github.io/edutechltda/" target="_blank" rel="noopener noreferrer" style="color: #2aa5a8; text-decoration: none; font-weight: bold; font-size: 16px;">
+                    Edutech Ltda </>
+                </a>
+            </p>
             <div class="social-links">
                 <a class="social-link" href="#" aria-label="Instagram">
                     <svg viewBox="0 0 24 24">
@@ -681,17 +688,12 @@
                         <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                     </svg>
                 </a>
-                <a class="social-link" href="https://wa.me/573206926909" target="_blank" aria-label="WhatsApp">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
-                    </svg>
-                </a>
             </div>
         </div>
     </footer>
 
     <!-- WHATSAPP FAB -->
-    <a class="whatsapp-fab" href="https://wa.me/573206926909" target="_blank" aria-label="WhatsApp">
+    <a class="whatsapp-fab" href="https://wa.me/573103716894" target="_blank" aria-label="WhatsApp">
         <svg viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
         </svg>
