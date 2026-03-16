@@ -12,7 +12,6 @@
     <!-- NAVBAR -->
     <nav id="navbar">
         <a class="logo" href="#">
-            <!-- <div class="logo-icon">M</div> -->
             <div class="logo-text">
                 <div class="brand">MAR<span>CA</span> &amp; MEDIOS</div>
                 <div class="sub">Publicidad · Eventos</div>
@@ -23,8 +22,60 @@
             <a href="#proceso">Proceso</a>
             <a href="#beneficios">¿Por qué nosotros?</a>
             <a href="#blog">Blog</a>
+            <a href="#cotizar">Contactanos</a>
+
+            <!-- NUEVO: Dropdown Ciudades -->
+            <div class="nav-dropdown" id="navDropdown">
+                <button class="nav-dropdown-trigger" id="dropdownTrigger" aria-expanded="false" aria-haspopup="true">
+                    Ciudades
+                    <svg class="dropdown-arrow" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path d="m6 9 6 6 6-6" />
+                    </svg>
+                </button>
+
+                <div class="nav-dropdown-menu" id="dropdownMenu" role="menu">
+                    <div class="dropdown-glow"></div>
+
+                    <a href="ciudades/cartagena.php" class="dropdown-item" role="menuitem">
+                        <div class="dropdown-item-body">
+                            <span class="dropdown-item-name">Cartagena de Indias</span>
+                            <span class="dropdown-item-desc">Centro histórico del Caribe</span>
+                        </div>
+                        <svg class="dropdown-item-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path d="m9 18 6-6-6-6" />
+                        </svg>
+                    </a>
+
+                    <a href="ciudades/barranquilla.html" class="dropdown-item" role="menuitem">
+                        <div class="dropdown-item-body">
+                            <span class="dropdown-item-name">Barranquilla</span>
+                            <span class="dropdown-item-desc">Capital del Atlántico</span>
+                        </div>
+                        <svg class="dropdown-item-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path d="m9 18 6-6-6-6" />
+                        </svg>
+                    </a>
+
+                    <a href="ciudades/santamarta.html" class="dropdown-item" role="menuitem">
+                        <div class="dropdown-item-body">
+                            <span class="dropdown-item-name">Santa Marta</span>
+                            <span class="dropdown-item-desc">Ciudad histórica de Colombia</span>
+                        </div>
+                        <svg class="dropdown-item-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path d="m9 18 6-6-6-6" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <!-- FIN Dropdown -->
         </div>
-        <a href="#cotizar" class="nav-cta" style="margin-left:auto">Cotizar ahora</a>
+        <a href="#cotizar" class="nav-cta">Cotizar ahora</a>
+        <a href="login.php" class="nav-admin-btn" aria-label="Panel de administración" title="Administrador">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+            </svg>
+        </a>
     </nav>
 
     <!-- HERO -->
@@ -63,14 +114,14 @@
                     <div class="label">Años de experiencia</div>
                 </div>
                 <div class="stat-item">
-                    <div class="num">2</div>
+                    <div class="num">3</div>
                     <div class="label">Ciudades</div>
                 </div>
             </div>
         </div>
 
         <div class="hero-image">
-            <img src="public\images\hero.webp" alt="Stand Marca & Medios" onerror="this.style.display='none'" />
+            <img src="public\images\hero\hero.webp" alt="Stand Marca & Medios" onerror="this.style.display='none'" />
         </div>
     </section>
 
@@ -128,18 +179,19 @@
         </div>
     </div>
 
-    <!-- TABS: CARTAGENA + BARRANQUILLA -->
+    <!-- TABS: CARTAGENA + BARRANQUILLA + SANTA MARTA-->
     <section class="tabs-section" id="stands">
         <div class="tabs-header reveal">
             <p class="section-eyebrow">Nuestros Servicios</p>
-            <h2 class="section-title">STANDS EN <span class="accent">DOS CIUDADES</span></h2>
-            <p class="section-subtitle">Diseño, producción y montaje de stands para ferias y eventos corporativos en Cartagena de Indias y Barranquilla.</p>
+            <h2 class="section-title">STANDS EN <span class="accent">TRES CIUDADES</span></h2>
+            <p class="section-subtitle">Diseño, producción y montaje de stands para ferias y eventos corporativos en Cartagena de Indias, Barranquilla y Santa Marta.</p>
         </div>
 
         <div class="tabs-nav reveal delay-1" id="tabsNav">
             <div class="tab-slider" id="tabSlider"></div>
             <button class="tab-btn active" data-tab="cartagena" onclick="switchTab('cartagena', this)">Cartagena de Indias</button>
             <button class="tab-btn" data-tab="barranquilla" onclick="switchTab('barranquilla', this)">Barranquilla</button>
+            <button class="tab-btn" data-tab="santamarta" onclick="switchTab('santamarta', this)">Santa Marta</button>
         </div>
 
         <!-- TAB CARTAGENA -->
@@ -375,6 +427,122 @@
                         <div class="product-info">
                             <div class="product-type" style="color:#1a3aff">Alquiler</div>
                             <div class="product-name">Alquiler de Stands Barranquilla</div>
+                            <div class="product-price">Consultar disponibilidad</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB SANTA MARTA -->
+        <div class="tab-panel" id="tab-santamarta">
+            <div class="city-hero">
+                <div class="city-intro reveal-left">
+                    <p class="section-eyebrow" style="color:#00b894">Santa Marta</p>
+                    <h3 class="city-title">STANDS QUE <span style="color:#00b894">BRILLAN</span> EN SM</h3>
+                    <p class="city-desc">Extendemos nuestra experiencia a la ciudad histórica de Colombia. Diseñamos y montamos stands para ferias, congresos y eventos corporativos en Santa Marta, con la misma calidad y atención personalizada que nos caracteriza.</p>
+                    <div class="city-features">
+                        <div class="city-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20,6 9,17 4,12" />
+                            </svg>Conocimiento de los principales recintos de la ciudad</div>
+                        <div class="city-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20,6 9,17 4,12" />
+                            </svg>Stands modulares de entrega rápida</div>
+                        <div class="city-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20,6 9,17 4,12" />
+                            </svg>Diseño 3D y renders antes de producción</div>
+                        <div class="city-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20,6 9,17 4,12" />
+                            </svg>Transporte e instalación incluidos desde Cartagena</div>
+                    </div>
+                </div>
+                <div class="reveal-right">
+                    <p class="products-label" style="color:#00b894">Recintos donde operamos</p>
+                    <div class="venues-grid">
+                        <div class="venue-card" style="border-color:rgba(0,184,148,0.15)">
+                            <div class="venue-icon" style="background:linear-gradient(135deg,#00b894,#007a63)"><svg viewBox="0 0 24 24">
+                                    <path d="M1 22h22M3 22V8l9-6 9 6v14M9 22v-6h6v6" />
+                                </svg></div>
+                            <div class="venue-name">Centro de Convenciones Santa Marta</div>
+                        </div>
+                        <div class="venue-card" style="border-color:rgba(0,184,148,0.15)">
+                            <div class="venue-icon" style="background:linear-gradient(135deg,#00b894,#007a63)"><svg viewBox="0 0 24 24">
+                                    <path d="M1 22h22M3 22V8l9-6 9 6v14M9 22v-6h6v6" />
+                                </svg></div>
+                            <div class="venue-name">Hotel Irotama · Centro de Eventos</div>
+                        </div>
+                        <div class="venue-card" style="border-color:rgba(0,184,148,0.15)">
+                            <div class="venue-icon" style="background:linear-gradient(135deg,#00b894,#007a63)"><svg viewBox="0 0 24 24">
+                                    <path d="M1 22h22M3 22V8l9-6 9 6v14M9 22v-6h6v6" />
+                                </svg></div>
+                            <div class="venue-name">Hotel Zuana Beach Resort</div>
+                        </div>
+                        <div class="venue-card" style="border-color:rgba(0,184,148,0.15)">
+                            <div class="venue-icon" style="background:linear-gradient(135deg,#00b894,#007a63)"><svg viewBox="0 0 24 24">
+                                    <path d="M1 22h22M3 22V8l9-6 9 6v14M9 22v-6h6v6" />
+                                </svg></div>
+                            <div class="venue-name">Cámara de Comercio de Santa Marta</div>
+                        </div>
+                        <div class="venue-card" style="border-color:rgba(0,184,148,0.15)">
+                            <div class="venue-icon" style="background:linear-gradient(135deg,#00b894,#007a63)"><svg viewBox="0 0 24 24">
+                                    <path d="M1 22h22M3 22V8l9-6 9 6v14M9 22v-6h6v6" />
+                                </svg></div>
+                            <div class="venue-name">Eventos Fenalco Magdalena</div>
+                        </div>
+                        <div class="venue-card" style="border-color:rgba(0,184,148,0.15)">
+                            <div class="venue-icon" style="background:linear-gradient(135deg,#00b894,#007a63)"><svg viewBox="0 0 24 24">
+                                    <path d="M1 22h22M3 22V8l9-6 9 6v14M9 22v-6h6v6" />
+                                </svg></div>
+                            <div class="venue-name">Y más centros en Santa Marta</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="products-section reveal">
+                <p class="products-label" style="color:#00b894">Catálogo de Stands — Santa Marta</p>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-img" style="background:linear-gradient(135deg,#003d35,#001a16)">
+                            <img src="./public/images/stan5.jpg" alt="Stand Modular SM" onerror="this.style.display='none'" />
+                            <div class="product-overlay"><a href="#cotizar" class="overlay-btn" style="background:#00b894">Cotizar</a></div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-type" style="color:#00b894">Modular</div>
+                            <div class="product-name">Stand Modular Express</div>
+                            <div class="product-price">Desde <strong>$3.500.000</strong></div>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-img" style="background:linear-gradient(135deg,#003d35,#001a16)">
+                            <img src="./public/images/stan2.jpg" alt="Stand Isla SM" onerror="this.style.display='none'" />
+                            <div class="product-overlay"><a href="#cotizar" class="overlay-btn" style="background:#00b894">Cotizar</a></div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-type" style="color:#00b894">Isla</div>
+                            <div class="product-name">Stand Tipo Isla Santa Marta</div>
+                            <div class="product-price">Desde <strong>$6.500.000</strong> — $13.000.000</div>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-img" style="background:linear-gradient(135deg,#003d35,#001a16)">
+                            <img src="./public/images/stan3.jpg" alt="Stand Premium SM" onerror="this.style.display='none'" />
+                            <div class="product-overlay"><a href="#cotizar" class="overlay-btn" style="background:#00b894">Cotizar</a></div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-type" style="color:#00b894">Premium</div>
+                            <div class="product-name">Stand Doble Altura</div>
+                            <div class="product-price">Desde <strong>$10.000.000</strong></div>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-img" style="background:linear-gradient(135deg,#003d35,#001a16)">
+                            <img src="./public/images/stan4.jpg" alt="Stand Alquiler SM" onerror="this.style.display='none'" />
+                            <div class="product-overlay"><a href="#cotizar" class="overlay-btn" style="background:#00b894">Cotizar</a></div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-type" style="color:#00b894">Alquiler</div>
+                            <div class="product-name">Alquiler de Stands Santa Marta</div>
                             <div class="product-price">Consultar disponibilidad</div>
                         </div>
                     </div>

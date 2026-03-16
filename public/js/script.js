@@ -123,3 +123,38 @@ const counterObserver = new IntersectionObserver(
     },
 );
 document.querySelectorAll(".why-stat").forEach((el) => counterObserver.observe(el));
+
+// ── DROPDOWN CIUDADES — agregar al final de script.js ──
+(function () {
+    const trigger = document.getElementById("dropdownTrigger");
+    const menu = document.getElementById("dropdownMenu");
+    if (!trigger || !menu) return;
+
+    // Abrir/cerrar con clic
+    trigger.addEventListener("click", function (e) {
+        e.stopPropagation();
+        const isOpen = trigger.getAttribute("aria-expanded") === "true";
+        trigger.setAttribute("aria-expanded", String(!isOpen));
+        menu.classList.toggle("open", !isOpen);
+    });
+
+    // Cerrar al hacer clic fuera
+    document.addEventListener("click", function () {
+        trigger.setAttribute("aria-expanded", "false");
+        menu.classList.remove("open");
+    });
+
+    // Evitar que el clic dentro del menú lo cierre
+    menu.addEventListener("click", function (e) {
+        e.stopPropagation();
+    });
+
+    // Cerrar con Escape
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+            trigger.setAttribute("aria-expanded", "false");
+            menu.classList.remove("open");
+            trigger.focus();
+        }
+    });
+})();
