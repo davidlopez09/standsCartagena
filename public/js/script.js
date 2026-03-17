@@ -158,3 +158,36 @@ document.querySelectorAll(".why-stat").forEach((el) => counterObserver.observe(e
         }
     });
 })();
+
+// ── HAMBURGER MENU ──────────────────────────────────────────────
+const hamburger = document.getElementById("hamburger");
+const mobileMenu = document.getElementById("mobileMenu");
+const citiesToggle = document.getElementById("mobileCitiesToggle");
+const mobileCities = document.getElementById("mobileCities");
+
+hamburger.addEventListener("click", () => {
+    const isOpen = mobileMenu.classList.toggle("open");
+    hamburger.classList.toggle("open", isOpen);
+    hamburger.setAttribute("aria-expanded", isOpen);
+    // Cerrar ciudades al cerrar el menú
+    if (!isOpen) {
+        mobileCities.classList.remove("open");
+        citiesToggle.classList.remove("cities-open");
+    }
+});
+
+citiesToggle.addEventListener("click", () => {
+    mobileCities.classList.toggle("open");
+    citiesToggle.classList.toggle("cities-open");
+});
+
+// Cerrar menú al hacer clic en cualquier enlace
+mobileMenu.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+        mobileMenu.classList.remove("open");
+        hamburger.classList.remove("open");
+        hamburger.setAttribute("aria-expanded", false);
+        mobileCities.classList.remove("open");
+        citiesToggle.classList.remove("cities-open");
+    });
+});

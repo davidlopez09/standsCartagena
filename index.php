@@ -85,13 +85,58 @@ include 'includes/head.php';
             </div>
         </div>
         <a href="#cotizar" class="nav-cta">Cotizar ahora</a>
-        <a href="login.php" class="nav-admin-btn" aria-label="Panel de administración" title="Administrador">
+        <a href="login.php" class="nav-admin-btn desktop-only" aria-label="Panel de administración" title="Administrador">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
             </svg>
         </a>
+
+        <!-- HAMBURGER BUTTON — va justo antes de </nav> -->
+        <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </nav>
+
+    <!-- MOBILE MENU — va inmediatamente después de </nav> -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#stands">Diseño de Stands</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#beneficios">¿Por qué nosotros?</a>
+        <a href="#blog">Blog</a>
+        <a href="#cotizar">Contáctanos</a>
+
+        <!-- Ciudades con submenu -->
+        <div class="mobile-menu-item" id="mobileCitiesToggle">
+            Ciudades
+            <svg class="mobile-cities-arrow" width="14" height="14" fill="none"
+                stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="m6 9 6 6 6-6" />
+            </svg>
+        </div>
+        <div class="mobile-cities" id="mobileCities">
+            <a href="ciudades/cartagena.php">Cartagena de Indias</a>
+            <a href="ciudades/barranquilla.php">Barranquilla</a>
+            <a href="ciudades/santaMarta.php">Santa Marta</a>
+        </div>
+        <!-- Botón Ingresar — solo en móvil -->
+        <div class="mobile-menu-cta mobile-menu-login">
+            <a href="login.php">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+                Ingresar
+            </a>
+        </div>
+
+        <div class="mobile-menu-cta">
+            <a href="#cotizar">Cotizar ahora</a>
+        </div>
+    </div>
 
     <!-- HERO -->
     <section class="hero">

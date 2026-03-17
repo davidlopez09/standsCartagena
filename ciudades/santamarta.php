@@ -46,7 +46,7 @@ $stands = $stmt->fetchAll();
             </div>
         </a>
         <div class="nav-links">
-            <a href="../index.php#">Inicio</a>
+            <a href="../index.php">Inicio</a>
             <a href="../index.php#stands">Servicios</a>
             <a href="../index.php#proceso">Proceso</a>
             <a href="../index.php#beneficios">¿Por qué nosotros?</a>
@@ -54,14 +54,41 @@ $stands = $stmt->fetchAll();
             <a href="cartagena.php">Cartagena</a>
             <a href="barranquilla.php">Barranquilla</a>
         </div>
-        <a href="#cotizar" class="nav-cta" style="margin-left: auto">Cotizar ahora</a>
-        <a href="../login.php" class="nav-admin-btn" aria-label="Panel de administración" title="Administrador">
+        <a href="#cotizar" class="nav-cta">Cotizar ahora</a>
+        <a href="../login.php" class="nav-admin-btn desktop-only" aria-label="Administrador" title="Administrador">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
             </svg>
         </a>
+        <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="../index.php">Inicio</a>
+        <a href="../index.php#stands">Servicios</a>
+        <a href="../index.php#proceso">Proceso</a>
+        <a href="../index.php#beneficios">¿Por qué nosotros?</a>
+        <a href="cartagena.php">Cartagena</a>
+        <a href="barranquilla.php">Barranquilla</a>
+        <a href="santaMarta.php">Santa Marta</a>
+        <div class="mobile-menu-login">
+            <a href="../login.php">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+                Ingresar
+            </a>
+        </div>
+        <div class="mobile-menu-cta">
+            <a href="#cotizar">Cotizar ahora</a>
+        </div>
+    </div>
 
     <section class="hero">
         <div class="hero-bg"></div>

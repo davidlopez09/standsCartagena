@@ -4,6 +4,7 @@ let mx = 0,
     my = 0,
     rx = 0,
     ry = 0;
+
 document.addEventListener("mousemove", (e) => {
     mx = e.clientX;
     my = e.clientY;
@@ -15,7 +16,8 @@ document.addEventListener("mousemove", (e) => {
     ring.style.transform = `translate(${rx}px,${ry}px)`;
     requestAnimationFrame(animRing);
 })();
-document.querySelectorAll("a,button,.product-card,.benefit").forEach((el) => {
+
+document.querySelectorAll("a, button, .product-card, .benefit").forEach((el) => {
     el.addEventListener("mouseenter", () => {
         ring.style.width = "54px";
         ring.style.height = "54px";
@@ -27,9 +29,11 @@ document.querySelectorAll("a,button,.product-card,.benefit").forEach((el) => {
         ring.style.borderColor = "rgba(240,90,26,0.6)";
     });
 });
+
 window.addEventListener("scroll", () => {
     document.getElementById("navbar").classList.toggle("scrolled", window.scrollY > 30);
 });
+
 const obs = new IntersectionObserver(
     (entries) => {
         entries.forEach((e) => {
@@ -38,4 +42,22 @@ const obs = new IntersectionObserver(
     },
     { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
 );
-document.querySelectorAll(".reveal,.reveal-left,.reveal-right").forEach((el) => obs.observe(el));
+document.querySelectorAll(".reveal, .reveal-left, .reveal-right").forEach((el) => obs.observe(el));
+
+// ── HAMBURGER MENU ──
+const hamburger = document.getElementById("hamburger");
+const mobileMenu = document.getElementById("mobileMenu");
+
+hamburger.addEventListener("click", () => {
+    const isOpen = mobileMenu.classList.toggle("open");
+    hamburger.classList.toggle("open", isOpen);
+    hamburger.setAttribute("aria-expanded", isOpen);
+});
+
+mobileMenu.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+        mobileMenu.classList.remove("open");
+        hamburger.classList.remove("open");
+        hamburger.setAttribute("aria-expanded", false);
+    });
+});
