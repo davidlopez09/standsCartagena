@@ -1300,7 +1300,7 @@ $indexExists = file_exists(PROJECT_ROOT . 'index.php');
                     <p>El index.php del cliente será reemplazado por una página de "Sitio no disponible". El cliente no podrá ver su web hasta que la habilites de nuevo.</p>
                     <div class="field">
                         <label>Motivo (visible para visitantes)</label>
-                        <input type="text" id="disable_reason" placeholder="Ej: Pago pendiente — Sitio suspendido temporalmente" value="Este sitio web se encuentra suspendido por falta de pago." />
+                        <input type="text" id="disable_reason" placeholder="Ej: Pago pendiente — Sitio suspendido temporalmente" value="Para más información, por favor comuníquese con administración  edutechltda.web@gmail.com." />
                     </div>
                     <div class="control-actions">
                         <button class="btn btn-yellow" onclick="toggleSite('off')">
