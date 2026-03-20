@@ -9,41 +9,35 @@ if (!isset($_SESSION['admin_logged']) || $_SESSION['admin_logged'] !== true) {
 require_once './app/conexion.php';
 $admin = htmlspecialchars($_SESSION['admin_usuario']);
 
-// ─── Mapeo colores por id_ciudad ──────────────────────────────────────────────
 $cityMeta = [
-    1 => ['label' => 'Cartagena',   'color' => '#f05a1a', 'abbr' => 'CTG'],
-    2 => ['label' => 'Santa Marta', 'color' => '#00b894', 'abbr' => 'SMR'],
+    1 => ['label' => 'Cartagena',    'color' => '#f05a1a', 'abbr' => 'CTG'],
+    2 => ['label' => 'Santa Marta',  'color' => '#00b894', 'abbr' => 'SMR'],
     3 => ['label' => 'Barranquilla', 'color' => '#1a3aff', 'abbr' => 'BQA'],
-    4 => ['label' => 'Index',       'color' => '#9b59b6', 'abbr' => 'IDX'],
+    4 => ['label' => 'Index',        'color' => '#9b59b6', 'abbr' => 'IDX'],
 ];
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// AJAX ACTIONS
-// ═══════════════════════════════════════════════════════════════════════════════
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     header('Content-Type: application/json');
     $action = $_POST['action'];
 
-    // LOGOUT
     if ($action === 'logout') {
         session_destroy();
         echo json_encode(['ok' => true]);
         exit;
     }
 
-    // ── GUARDAR STAND ────────────────────────────────────────────────────────
     if ($action === 'save_stand') {
-        $id        = intval($_POST['id']          ?? 0);
-        $id_ciudad = intval($_POST['id_ciudad']   ?? 0);
-        $tipo      = trim($_POST['tipo']          ?? '');
-        $nombre    = trim($_POST['nombre']        ?? '');
-        $precio    = trim($_POST['precio']        ?? '');
-        $desc      = trim($_POST['descripcion']   ?? '');
-        $orden     = intval($_POST['orden']       ?? 0);
-        $activo    = intval($_POST['activo']      ?? 1);
-        $destacado = intval($_POST['destacado']   ?? 0);
+        $id           = intval($_POST['id']           ?? 0);
+        $id_ciudad    = intval($_POST['id_ciudad']    ?? 0);
+        $id_modalidad = intval($_POST['id_modalidad'] ?? 0);
+        $tipo         = trim($_POST['tipo']           ?? '');
+        $nombre       = trim($_POST['nombre']         ?? '');
+        $desc         = trim($_POST['descripcion']    ?? '');
+        $orden        = intval($_POST['orden']        ?? 0);
+        $activo       = intval($_POST['activo']       ?? 1);
+        $destacado    = intval($_POST['destacado']    ?? 0);
+        $imagen_path  = trim($_POST['imagen_actual']  ?? '');
 
-        $imagen_path = trim($_POST['imagen_actual'] ?? '');
         if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
             $ext_allowed = ['jpg', 'jpeg', 'png', 'webp'];
             $ext = strtolower(pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION));
@@ -52,7 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 if (!is_dir($upload_dir)) mkdir($upload_dir, 0755, true);
                 $filename = uniqid('stand_') . '.' . $ext;
                 if (move_uploaded_file($_FILES['imagen']['tmp_name'], $upload_dir . $filename)) {
-                    // Borrar imagen anterior si existe
                     if ($imagen_path && file_exists($imagen_path)) @unlink($imagen_path);
                     $imagen_path = $upload_dir . $filename;
                 }
@@ -60,18 +53,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         }
 
         if ($id > 0) {
-            $stmt = $pdo->prepare("UPDATE stands SET id_ciudad=?,tipo=?,nombre=?,precio=?,descripcion=?,imagen=?,orden=?,activo=?,destacado=?,updated_at=NOW() WHERE id=?");
-            $stmt->execute([$id_ciudad, $tipo, $nombre, $precio, $desc, $imagen_path, $orden, $activo, $destacado, $id]);
+            $stmt = $pdo->prepare("UPDATE stands SET id_ciudad=?,id_modalidad=?,tipo=?,nombre=?,descripcion=?,imagen=?,orden=?,activo=?,destacado=?,updated_at=NOW() WHERE id=?");
+            $stmt->execute([$id_ciudad, $id_modalidad, $tipo, $nombre, $desc, $imagen_path, $orden, $activo, $destacado, $id]);
         } else {
-            $stmt = $pdo->prepare("INSERT INTO stands (id_ciudad,tipo,nombre,precio,descripcion,imagen,orden,activo,destacado) VALUES (?,?,?,?,?,?,?,?,?)");
-            $stmt->execute([$id_ciudad, $tipo, $nombre, $precio, $desc, $imagen_path, $orden, $activo, $destacado]);
+            $stmt = $pdo->prepare("INSERT INTO stands (id_ciudad,id_modalidad,tipo,nombre,descripcion,imagen,orden,activo,destacado) VALUES (?,?,?,?,?,?,?,?,?)");
+            $stmt->execute([$id_ciudad, $id_modalidad, $tipo, $nombre, $desc, $imagen_path, $orden, $activo, $destacado]);
             $id = $pdo->lastInsertId();
         }
         echo json_encode(['ok' => true, 'id' => $id, 'imagen' => $imagen_path]);
         exit;
     }
 
-    // ── ELIMINAR STAND ───────────────────────────────────────────────────────
     if ($action === 'delete_stand') {
         $id = intval($_POST['id'] ?? 0);
         if ($id > 0) {
@@ -85,19 +77,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         exit;
     }
 
-    // ── TOGGLE DESTACADO ─────────────────────────────────────────────────────
     if ($action === 'toggle_destacado') {
-        $id  = intval($_POST['id']        ?? 0);
+        $id  = intval($_POST['id'] ?? 0);
         $val = intval($_POST['destacado'] ?? 0);
         $pdo->prepare("UPDATE stands SET destacado=? WHERE id=?")->execute([$val, $id]);
         echo json_encode(['ok' => true]);
         exit;
     }
 
-    // ── GUARDAR CIUDAD ───────────────────────────────────────────────────────
     if ($action === 'save_ciudad') {
-        $id_c   = intval($_POST['ciudad_id']     ?? 0);
-        $nombre = trim($_POST['ciudad_nombre']   ?? '');
+        $id_c   = intval($_POST['ciudad_id'] ?? 0);
+        $nombre = trim($_POST['ciudad_nombre'] ?? '');
         if ($nombre === '') {
             echo json_encode(['ok' => false, 'msg' => 'Nombre requerido']);
             exit;
@@ -112,41 +102,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         exit;
     }
 
-    // ── ELIMINAR CIUDAD ──────────────────────────────────────────────────────
     if ($action === 'delete_ciudad') {
         $id_c = intval($_POST['ciudad_id'] ?? 0);
         if ($id_c > 0) {
-            // Obtener imágenes de stands de esa ciudad y borrarlas
             $rows = $pdo->prepare("SELECT imagen FROM stands WHERE id_ciudad=?");
             $rows->execute([$id_c]);
             foreach ($rows->fetchAll() as $r) {
                 if ($r['imagen'] && file_exists($r['imagen'])) @unlink($r['imagen']);
             }
-            // Obtener imagen principal y borrarla
             $imgRow = $pdo->prepare("SELECT ruta FROM imagesprincipales WHERE id_ciudad=?");
             $imgRow->execute([$id_c]);
             $imgR = $imgRow->fetch();
             if ($imgR && file_exists($imgR['ruta'])) @unlink($imgR['ruta']);
-            // La FK CASCADE borrará stands e imagesprincipales automáticamente
             $pdo->prepare("DELETE FROM ciudades WHERE id=?")->execute([$id_c]);
         }
         echo json_encode(['ok' => true]);
         exit;
     }
 
-    // ── GUARDAR IMAGEN PRINCIPAL ─────────────────────────────────────────────
     if ($action === 'save_imagen_principal') {
         $id_ciudad = intval($_POST['img_ciudad'] ?? 0);
         if ($id_ciudad <= 0) {
             echo json_encode(['ok' => false, 'msg' => 'Ciudad inválida']);
             exit;
         }
-
-        // Verificar si ya existe imagen
         $existing = $pdo->prepare("SELECT ruta FROM imagesprincipales WHERE id_ciudad=?");
         $existing->execute([$id_ciudad]);
         $existRow = $existing->fetch();
-
         if (!isset($_FILES['img_principal']) || $_FILES['img_principal']['error'] !== UPLOAD_ERR_OK) {
             echo json_encode(['ok' => false, 'msg' => 'No se recibió imagen']);
             exit;
@@ -154,21 +136,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         $ext_allowed = ['jpg', 'jpeg', 'png', 'webp'];
         $ext = strtolower(pathinfo($_FILES['img_principal']['name'], PATHINFO_EXTENSION));
         if (!in_array($ext, $ext_allowed)) {
-            echo json_encode(['ok' => false, 'msg' => 'Formato no permitido. Use JPG, PNG o WEBP']);
+            echo json_encode(['ok' => false, 'msg' => 'Formato no permitido']);
             exit;
         }
-
         $upload_dir = 'public/images/hero/';
         if (!is_dir($upload_dir)) mkdir($upload_dir, 0755, true);
         $filename = 'hero_ciudad_' . $id_ciudad . '_' . time() . '.' . $ext;
         if (!move_uploaded_file($_FILES['img_principal']['tmp_name'], $upload_dir . $filename)) {
-            echo json_encode(['ok' => false, 'msg' => 'Error al subir imagen']);
+            echo json_encode(['ok' => false, 'msg' => 'Error al subir']);
             exit;
         }
         $nueva_ruta = $upload_dir . $filename;
-
         if ($existRow) {
-            // Borrar imagen anterior del disco
             if ($existRow['ruta'] && file_exists($existRow['ruta'])) @unlink($existRow['ruta']);
             $pdo->prepare("UPDATE imagesprincipales SET ruta=? WHERE id_ciudad=?")->execute([$nueva_ruta, $id_ciudad]);
         } else {
@@ -178,7 +157,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         exit;
     }
 
-    // ── ELIMINAR IMAGEN PRINCIPAL ────────────────────────────────────────────
     if ($action === 'delete_imagen_principal') {
         $id_ciudad = intval($_POST['img_ciudad'] ?? 0);
         $imgRow = $pdo->prepare("SELECT ruta FROM imagesprincipales WHERE id_ciudad=?");
@@ -194,15 +172,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     exit;
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// LECTURA DE DATOS
-// ═══════════════════════════════════════════════════════════════════════════════
-$ciudadesRaw = $pdo->query("SELECT * FROM ciudades ORDER BY id ASC")->fetchAll();
+// ═══ LECTURA DE DATOS ═══
+$ciudadesRaw    = $pdo->query("SELECT * FROM ciudades ORDER BY id ASC")->fetchAll();
+$modalidadesRaw = $pdo->query("SELECT * FROM modalidades ORDER BY id ASC")->fetchAll();
 
 $stands = $pdo->query("
-    SELECT s.*, c.nombre AS ciudad_nombre
+    SELECT s.*, c.nombre AS ciudad_nombre,
+           COALESCE(m.nombre,'—') AS nombre
     FROM stands s
     JOIN ciudades c ON c.id = s.id_ciudad
+    LEFT JOIN modalidades m ON m.id = s.id_modalidad
     ORDER BY s.id_ciudad ASC, s.orden ASC, s.id ASC
 ")->fetchAll();
 
@@ -211,12 +190,11 @@ foreach ($ciudadesRaw as $c) $byCity[$c['id']] = [];
 foreach ($stands as $s)      $byCity[$s['id_ciudad']][] = $s;
 
 $imagenesHero = $pdo->query("SELECT * FROM imagesprincipales")->fetchAll(PDO::FETCH_ASSOC);
-$heroByCity = [];
+$heroByCity   = [];
 foreach ($imagenesHero as $h) $heroByCity[$h['id_ciudad']] = $h;
 
 $totalStands = count($stands);
 
-// Merge cityMeta con ciudades de BD
 foreach ($ciudadesRaw as $c) {
     if (!isset($cityMeta[$c['id']])) {
         $cityMeta[$c['id']] = ['label' => $c['nombre'], 'color' => '#888', 'abbr' => strtoupper(substr($c['nombre'], 0, 3))];
@@ -237,7 +215,6 @@ foreach ($ciudadesRaw as $c) {
 </head>
 
 <body>
-
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- SIDEBAR -->
@@ -257,16 +234,14 @@ foreach ($ciudadesRaw as $c) {
                     <line x1="8" y1="21" x2="16" y2="21" />
                     <line x1="12" y1="17" x2="12" y2="21" />
                 </svg>
-                Stands
-                <span class="count"><?= $totalStands ?></span>
+                Stands <span class="count"><?= $totalStands ?></span>
             </button>
             <button class="nav-item" onclick="switchSection('ciudades',this)">
                 <svg viewBox="0 0 24 24">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                     <polyline points="9,22 9,12 15,12 15,22" />
                 </svg>
-                Ciudades
-                <span class="count"><?= count($ciudadesRaw) ?></span>
+                Ciudades <span class="count"><?= count($ciudadesRaw) ?></span>
             </button>
             <button class="nav-item" onclick="switchSection('imagenes',this)">
                 <svg viewBox="0 0 24 24">
@@ -274,8 +249,7 @@ foreach ($ciudadesRaw as $c) {
                     <circle cx="8.5" cy="8.5" r="1.5" />
                     <polyline points="21 15 16 10 5 21" />
                 </svg>
-                Imágenes Hero
-                <span class="count"><?= count($heroByCity) ?></span>
+                Imágenes Hero <span class="count"><?= count($heroByCity) ?></span>
             </button>
             <div class="nav-divider"></div>
             <div class="nav-section-label">Sistema</div>
@@ -303,14 +277,7 @@ foreach ($ciudadesRaw as $c) {
     <!-- MAIN -->
     <div class="main">
         <header class="topbar">
-
-            <!-- AÑADIR ESTO AL INICIO -->
-            <button class="topbar-hamburger" id="dashHamburger" aria-label="Abrir menú">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-
+            <button class="topbar-hamburger" id="dashHamburger" aria-label="Abrir menú"><span></span><span></span><span></span></button>
             <div class="topbar-title">PANEL <span>ADMIN</span></div>
             <div class="topbar-right">
                 <div class="topbar-user">
@@ -361,7 +328,7 @@ foreach ($ciudadesRaw as $c) {
                 <div class="city-tabs" id="cityTabs">
                     <?php foreach ($ciudadesRaw as $i => $c):
                         $meta = $cityMeta[$c['id']] ?? ['color' => '#fff'];
-                        if ($c['nombre'] === 'index') continue; // Ocultar "index" de tabs de stands
+                        if ($c['nombre'] === 'index') continue;
                     ?>
                         <button class="city-tab <?= $i === 0 ? 'active' : '' ?>"
                             id="tab-city-<?= $c['id'] ?>"
@@ -402,21 +369,26 @@ foreach ($ciudadesRaw as $c) {
                                             <?php if ($stand['imagen'] && file_exists($stand['imagen'])): ?>
                                                 <img src="<?= htmlspecialchars($stand['imagen']) ?>?v=<?= time() ?>" alt="<?= htmlspecialchars($stand['nombre']) ?>" loading="lazy" />
                                             <?php else: ?>
-                                                <div class="stand-img-placeholder"><svg viewBox="0 0 24 24">
+                                                <div class="stand-img-placeholder">
+                                                    <svg viewBox="0 0 24 24">
                                                         <rect x="3" y="3" width="18" height="18" rx="2" />
                                                         <circle cx="8.5" cy="8.5" r="1.5" />
                                                         <polyline points="21 15 16 10 5 21" />
-                                                    </svg><span>Sin imagen</span></div>
+                                                    </svg>
+                                                    <span>Sin imagen</span>
+                                                </div>
                                             <?php endif; ?>
                                             <div class="stand-badge" style="background:<?= $meta['color'] ?>22;color:<?= $meta['color'] ?>;border:1px solid <?= $meta['color'] ?>44"><?= $meta['abbr'] ?></div>
-                                            <?php if ($stand['destacado']): ?>
-                                                <div class="destacado-badge">★ Destacado</div>
-                                            <?php endif; ?>
+                                            <?php if ($stand['destacado']): ?><div class="destacado-badge">★ Destacado</div><?php endif; ?>
                                         </div>
                                         <div class="stand-body">
                                             <div class="stand-type" style="color:<?= $meta['color'] ?>"><?= htmlspecialchars($stand['tipo']) ?></div>
                                             <div class="stand-name"><?= htmlspecialchars($stand['nombre']) ?></div>
-                                            <div class="stand-price">Precio: <strong style="color:<?= $meta['color'] ?>"><?= htmlspecialchars($stand['precio']) ?></strong></div>
+                                            <div style="margin:4px 0">
+                                                <span style="font-size:10px;font-weight:700;letter-spacing:1px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#8a9ab0;padding:2px 8px;border-radius:100px;">
+                                                    <?= htmlspecialchars($stand['nombre']) ?>
+                                                </span>
+                                            </div>
                                             <?php if ($stand['descripcion']): ?><div class="stand-desc"><?= htmlspecialchars($stand['descripcion']) ?></div><?php endif; ?>
                                             <div class="stand-actions">
                                                 <button class="btn-act edit" onclick='editStand(<?= json_encode($stand) ?>)'>
@@ -426,7 +398,9 @@ foreach ($ciudadesRaw as $c) {
                                                     </svg>
                                                     Editar
                                                 </button>
-                                                <button class="btn-act star <?= $stand['destacado'] ? 'on' : '' ?>" onclick="toggleDestacado(<?= $stand['id'] ?>,<?= $stand['destacado'] ? 0 : 1 ?>,this)" title="<?= $stand['destacado'] ? 'Quitar destacado' : 'Marcar destacado' ?>">
+                                                <button class="btn-act star <?= $stand['destacado'] ? 'on' : '' ?>"
+                                                    onclick="toggleDestacado(<?= $stand['id'] ?>,<?= $stand['destacado'] ? 0 : 1 ?>,this)"
+                                                    title="<?= $stand['destacado'] ? 'Quitar destacado' : 'Marcar destacado' ?>">
                                                     <svg viewBox="0 0 24 24">
                                                         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                                                     </svg>
@@ -477,11 +451,7 @@ foreach ($ciudadesRaw as $c) {
                             ?>
                                 <tr id="ciudad-row-<?= $c['id'] ?>">
                                     <td style="color:var(--muted);font-weight:600">#<?= $c['id'] ?></td>
-                                    <td>
-                                        <span class="badge-ciudad" style="background:<?= $meta['color'] ?>18;color:<?= $meta['color'] ?>;border:1px solid <?= $meta['color'] ?>35">
-                                            <?= $meta['abbr'] ?> — <?= htmlspecialchars($c['nombre']) ?>
-                                        </span>
-                                    </td>
+                                    <td><span class="badge-ciudad" style="background:<?= $meta['color'] ?>18;color:<?= $meta['color'] ?>;border:1px solid <?= $meta['color'] ?>35"><?= $meta['abbr'] ?> — <?= htmlspecialchars($c['nombre']) ?></span></td>
                                     <td><span style="color:var(--text);font-weight:600"><?= $count ?></span> <span style="color:var(--muted)">stands</span></td>
                                     <td>
                                         <div style="display:flex;gap:8px">
@@ -520,8 +490,8 @@ foreach ($ciudadesRaw as $c) {
                 </div>
                 <div class="img-grid">
                     <?php foreach ($ciudadesRaw as $c):
-                        $meta   = $cityMeta[$c['id']] ?? ['color' => '#888', 'abbr' => '???'];
-                        $heroR  = $heroByCity[$c['id']] ?? null;
+                        $meta  = $cityMeta[$c['id']] ?? ['color' => '#888', 'abbr' => '???'];
+                        $heroR = $heroByCity[$c['id']] ?? null;
                     ?>
                         <div class="img-card" id="img-card-<?= $c['id'] ?>">
                             <div class="img-preview-wrap">
@@ -540,7 +510,7 @@ foreach ($ciudadesRaw as $c) {
                                 <div class="img-city-name"><?= htmlspecialchars($c['nombre']) ?></div>
                                 <div class="img-ruta"><?= $heroR ? htmlspecialchars($heroR['ruta']) : '<span style="color:var(--muted);font-style:italic">Sin imagen asignada</span>' ?></div>
                                 <div class="img-actions">
-                                    <button class="btn-primary-sm" style="flex:1" onclick="openImgModal(<?= $c['id'] ?>, '<?= htmlspecialchars(addslashes($c['nombre'])) ?>', <?= $heroR ? 'true' : 'false' ?>)">
+                                    <button class="btn-primary-sm" style="flex:1" onclick="openImgModal(<?= $c['id'] ?>,'<?= htmlspecialchars(addslashes($c['nombre'])) ?>',<?= $heroR ? 'true' : 'false' ?>)">
                                         <svg viewBox="0 0 24 24">
                                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                                             <polyline points="17 8 12 3 7 8" />
@@ -549,7 +519,7 @@ foreach ($ciudadesRaw as $c) {
                                         <?= $heroR ? 'Cambiar' : 'Subir' ?>
                                     </button>
                                     <?php if ($heroR): ?>
-                                        <button class="btn-act del" style="flex:none;padding:8px 14px;font-size:12px;border-radius:9px" onclick="deleteImagen(<?= $c['id'] ?>, '<?= htmlspecialchars(addslashes($c['nombre'])) ?>')">
+                                        <button class="btn-act del" style="flex:none;padding:8px 14px;font-size:12px;border-radius:9px" onclick="deleteImagen(<?= $c['id'] ?>,'<?= htmlspecialchars(addslashes($c['nombre'])) ?>')">
                                             <svg viewBox="0 0 24 24">
                                                 <polyline points="3 6 5 6 21 6" />
                                                 <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
@@ -566,7 +536,7 @@ foreach ($ciudadesRaw as $c) {
         </div><!-- /content -->
     </div><!-- /main -->
 
-    <!-- ═══════════════════ MODAL STAND ═══════════════════ -->
+    <!-- ═══ MODAL STAND ═══ -->
     <div class="modal-overlay" id="standModal" onclick="closeStandModal(event)">
         <div class="modal" onclick="event.stopPropagation()">
             <div class="modal-header">
@@ -578,6 +548,8 @@ foreach ($ciudadesRaw as $c) {
                     <input type="hidden" name="action" value="save_stand" />
                     <input type="hidden" name="id" id="f_id" value="0" />
                     <input type="hidden" name="imagen_actual" id="f_imagen_actual" value="" />
+
+                    <!-- Ciudad + Modalidad -->
                     <div class="field-row">
                         <div class="field">
                             <label>Ciudad</label>
@@ -589,49 +561,57 @@ foreach ($ciudadesRaw as $c) {
                             </select>
                         </div>
                         <div class="field">
-                            <label>Tipo de stand</label>
-                            <input type="text" name="tipo" id="f_tipo" placeholder="Ej: Stand Isla" required />
+                            <label>Modalidad</label>
+                            <select name="id_modalidad" id="f_modalidad" required>
+                                <option value="">Seleccione modalidad</option>
+                                <?php foreach ($modalidadesRaw as $m): ?>
+                                    <option value="<?= $m['id'] ?>"><?= htmlspecialchars($m['nombre']) ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                     </div>
-                    <div class="field-row full">
-                        <div class="field">
-                            <label>Nombre del stand</label>
-                            <input type="text" name="nombre" id="f_nombre" placeholder="Ej: Stand Tipo Isla con Esquinero" required />
-                        </div>
-                    </div>
+
+                    <!-- Tipo + Orden -->
                     <div class="field-row">
                         <div class="field">
-                            <label>Precio</label>
-                            <input type="text" name="precio" id="f_precio" placeholder="Ej: Desde $6.000.000" required />
+                            <label>Tipo de stand</label>
+                            <input type="text" name="tipo" id="f_tipo" placeholder="Ej: Stand Isla" required />
                         </div>
                         <div class="field">
                             <label>Orden (catálogo)</label>
                             <input type="number" name="orden" id="f_orden" value="0" min="0" />
                         </div>
                     </div>
+
+                    <!-- Nombre -->
+                    <div class="field-row full">
+                        <div class="field">
+                            <label>Nombre del stand</label>
+                            <input type="text" name="nombre" id="f_nombre" placeholder="Ej: Stand Tipo Isla con Esquinero" required />
+                        </div>
+                    </div>
+
+                    <!-- Descripción -->
                     <div class="field-row full" style="margin-bottom:14px">
                         <div class="field">
                             <label>Descripción</label>
                             <textarea name="descripcion" id="f_desc" placeholder="Descripción breve..."></textarea>
                         </div>
                     </div>
-                    <!-- TOGGLES -->
+
+                    <!-- Toggles -->
                     <div style="display:flex;gap:24px;margin-bottom:16px;padding:12px 14px;background:var(--surface2);border-radius:10px;border:1px solid var(--border)">
                         <div class="toggle-wrap">
-                            <label class="toggle">
-                                <input type="checkbox" name="activo" id="f_activo" value="1" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
+                            <label class="toggle"><input type="checkbox" name="activo" id="f_activo" value="1" checked><span class="toggle-slider"></span></label>
                             <span class="toggle-label">Activo (visible)</span>
                         </div>
                         <div class="toggle-wrap">
-                            <label class="toggle">
-                                <input type="checkbox" name="destacado" id="f_destacado" value="1">
-                                <span class="toggle-slider"></span>
-                            </label>
+                            <label class="toggle"><input type="checkbox" name="destacado" id="f_destacado" value="1"><span class="toggle-slider"></span></label>
                             <span class="toggle-label">★ Destacado en inicio</span>
                         </div>
                     </div>
+
+                    <!-- Imagen -->
                     <div class="field">
                         <label>Imagen del stand</label>
                         <div class="img-upload-area" id="standUploadArea">
@@ -661,7 +641,7 @@ foreach ($ciudadesRaw as $c) {
         </div>
     </div>
 
-    <!-- ═══════════════════ MODAL CIUDAD ═══════════════════ -->
+    <!-- ═══ MODAL CIUDAD ═══ -->
     <div class="modal-overlay" id="ciudadModal" onclick="closeCiudadModal(event)">
         <div class="modal sm" onclick="event.stopPropagation()">
             <div class="modal-header">
@@ -694,7 +674,7 @@ foreach ($ciudadesRaw as $c) {
         </div>
     </div>
 
-    <!-- ═══════════════════ MODAL IMAGEN HERO ═══════════════════ -->
+    <!-- ═══ MODAL IMAGEN HERO ═══ -->
     <div class="modal-overlay" id="imgModal" onclick="closeImgModal(event)">
         <div class="modal sm" onclick="event.stopPropagation()">
             <div class="modal-header">
@@ -711,7 +691,7 @@ foreach ($ciudadesRaw as $c) {
                             <line x1="12" y1="9" x2="12" y2="13" />
                             <line x1="12" y1="17" x2="12.01" y2="17" />
                         </svg>
-                        <p>Ya existe una imagen para esta ciudad. Al subir una nueva, la imagen anterior será <strong>eliminada permanentemente</strong>.</p>
+                        <p>Ya existe una imagen. Al subir una nueva, la anterior será <strong>eliminada permanentemente</strong>.</p>
                     </div>
                     <div class="field" style="margin-bottom:0">
                         <label id="imgCiudadLabel">Ciudad</label>
@@ -742,7 +722,7 @@ foreach ($ciudadesRaw as $c) {
         </div>
     </div>
 
-    <!-- ═══════════════════ MODAL CONFIRMAR ELIMINAR ═══════════════════ -->
+    <!-- ═══ MODAL CONFIRMAR ELIMINAR ═══ -->
     <div class="modal-overlay" id="deleteModal" onclick="closeDeleteModal(event)">
         <div class="modal sm" onclick="event.stopPropagation()">
             <div class="modal-header">
@@ -777,14 +757,10 @@ foreach ($ciudadesRaw as $c) {
     </div>
 
     <script>
-        // ═══════════════════════════════════════════════════════════════════
-        // ESTADO GLOBAL
-        // ═══════════════════════════════════════════════════════════════════
         let currentCityId = <?= $ciudadesRaw[0]['id'] ?? 1 ?>;
         let deleteCallback = null;
         let toastTimer;
 
-        // ─── SECCIONES ────────────────────────────────────────────────────
         function switchSection(section, btn) {
             localStorage.setItem('dash_section', section);
             ['stands', 'ciudades', 'imagenes'].forEach(s => {
@@ -792,26 +768,20 @@ foreach ($ciudadesRaw as $c) {
             });
             document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
             if (btn) btn.classList.add('active');
-
-            // Cambiar botón del topbar
             const topBtn = document.getElementById('topbarAddBtn');
             if (section === 'stands') {
                 topBtn.style.display = '';
                 topBtn.onclick = () => openModal();
-                topBtn.querySelector('svg+span') ? null : null;
                 topBtn.lastChild.textContent = ' Nuevo Stand';
-            }
-            if (section === 'ciudades') {
+            } else if (section === 'ciudades') {
                 topBtn.style.display = '';
                 topBtn.onclick = () => openCiudadModal();
                 topBtn.lastChild.textContent = ' Nueva Ciudad';
-            }
-            if (section === 'imagenes') {
+            } else {
                 topBtn.style.display = 'none';
             }
         }
 
-        // ─── CITY TABS ────────────────────────────────────────────────────
         function showCity(cityId, btn) {
             localStorage.setItem('dash_city', cityId);
             currentCityId = cityId;
@@ -822,9 +792,7 @@ foreach ($ciudadesRaw as $c) {
             if (btn) btn.classList.add('active');
         }
 
-        // ═══════════════════════════════════════════════════════════════════
-        // MODAL STAND
-        // ═══════════════════════════════════════════════════════════════════
+        // ── MODAL STAND ──
         function openModal(cityId = null) {
             clearStandForm();
             document.getElementById('f_ciudad').value = cityId ?? currentCityId;
@@ -836,15 +804,14 @@ foreach ($ciudadesRaw as $c) {
             document.getElementById('standModalTitle').innerHTML = 'EDITAR <span>STAND</span>';
             document.getElementById('f_id').value = stand.id;
             document.getElementById('f_ciudad').value = stand.id_ciudad;
+            document.getElementById('f_modalidad').value = stand.id_modalidad ?? '';
             document.getElementById('f_tipo').value = stand.tipo;
             document.getElementById('f_nombre').value = stand.nombre;
-            document.getElementById('f_precio').value = stand.precio;
             document.getElementById('f_orden').value = stand.orden;
             document.getElementById('f_desc').value = stand.descripcion || '';
             document.getElementById('f_imagen_actual').value = stand.imagen || '';
             document.getElementById('f_activo').checked = stand.activo == 1;
             document.getElementById('f_destacado').checked = stand.destacado == 1;
-
             const prv = document.getElementById('standImgPreview');
             if (stand.imagen) {
                 prv.src = stand.imagen;
@@ -852,7 +819,6 @@ foreach ($ciudadesRaw as $c) {
             } else {
                 prv.style.display = 'none';
             }
-
             document.getElementById('standModal').classList.add('open');
         }
 
@@ -893,12 +859,9 @@ foreach ($ciudadesRaw as $c) {
             const orig = btn.innerHTML;
             btn.innerHTML = '<div class="spinner"></div> Guardando...';
             btn.disabled = true;
-
-            // Convertir checkboxes a valores numéricos
             const fd = new FormData(document.getElementById('standForm'));
             fd.set('activo', document.getElementById('f_activo').checked ? '1' : '0');
             fd.set('destacado', document.getElementById('f_destacado').checked ? '1' : '0');
-
             try {
                 const res = await fetch('dashboard.php', {
                     method: 'POST',
@@ -917,7 +880,6 @@ foreach ($ciudadesRaw as $c) {
             btn.disabled = false;
         }
 
-        // ─── TOGGLE DESTACADO RÁPIDO ───────────────────────────────────────
         async function toggleDestacado(id, newVal, btn) {
             const fd = new FormData();
             fd.append('action', 'toggle_destacado');
@@ -938,9 +900,7 @@ foreach ($ciudadesRaw as $c) {
             }
         }
 
-        // ═══════════════════════════════════════════════════════════════════
-        // MODAL CIUDAD
-        // ═══════════════════════════════════════════════════════════════════
+        // ── MODAL CIUDAD ──
         function openCiudadModal(ciudad = null) {
             document.getElementById('ciudadForm').reset();
             if (ciudad) {
@@ -976,9 +936,7 @@ foreach ($ciudadesRaw as $c) {
             }
         }
 
-        // ═══════════════════════════════════════════════════════════════════
-        // MODAL IMAGEN HERO
-        // ═══════════════════════════════════════════════════════════════════
+        // ── MODAL IMAGEN ──
         function openImgModal(cityId, cityName, hasExisting) {
             document.getElementById('imgForm').reset();
             document.getElementById('img_ciudad_id').value = cityId;
@@ -1022,8 +980,7 @@ foreach ($ciudadesRaw as $c) {
                 });
                 const data = await res.json();
                 if (data.ok) {
-                    const msg = data.had_previous ? 'Imagen actualizada (anterior eliminada)' : 'Imagen subida correctamente';
-                    showToast(msg, 'success');
+                    showToast(data.had_previous ? 'Imagen actualizada' : 'Imagen subida', 'success');
                     closeImgModal();
                     setTimeout(() => location.reload(), 700);
                 } else showToast(data.msg || 'Error al subir', 'error');
@@ -1059,9 +1016,7 @@ foreach ($ciudadesRaw as $c) {
             document.getElementById('deleteModal').classList.add('open');
         }
 
-        // ═══════════════════════════════════════════════════════════════════
-        // ELIMINAR STAND
-        // ═══════════════════════════════════════════════════════════════════
+        // ── ELIMINAR STAND ──
         function confirmDelete(id, name) {
             document.getElementById('deleteModalType').textContent = 'STAND';
             document.getElementById('deleteItemName').textContent = name;
@@ -1096,9 +1051,7 @@ foreach ($ciudadesRaw as $c) {
             document.getElementById('deleteModal').classList.add('open');
         }
 
-        // ═══════════════════════════════════════════════════════════════════
-        // ELIMINAR CIUDAD
-        // ═══════════════════════════════════════════════════════════════════
+        // ── ELIMINAR CIUDAD ──
         function confirmDeleteCiudad(id, name) {
             document.getElementById('deleteModalType').textContent = 'CIUDAD';
             document.getElementById('deleteItemName').textContent = name + ' (y todos sus stands e imágenes)';
@@ -1135,9 +1088,6 @@ foreach ($ciudadesRaw as $c) {
             document.getElementById('deleteModal').classList.remove('open');
         }
 
-        // ═══════════════════════════════════════════════════════════════════
-        // LOGOUT / TOAST / DRAG-DROP / ESC
-        // ═══════════════════════════════════════════════════════════════════
         async function doLogout() {
             const fd = new FormData();
             fd.append('action', 'logout');
@@ -1153,14 +1103,12 @@ foreach ($ciudadesRaw as $c) {
                 icon = document.getElementById('toastIcon');
             document.getElementById('toastMsg').textContent = msg;
             toast.className = 'toast ' + type + ' show';
-            icon.innerHTML = type === 'success' ?
-                '<polyline points="20 6 9 17 4 12"/>' :
-                '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>';
+            icon.innerHTML = type === 'success' ? '<polyline points="20 6 9 17 4 12"/>' : '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>';
             clearTimeout(toastTimer);
             toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-        // Drag & drop para upload de stands
+        // Drag & drop
         const standUpload = document.getElementById('standUploadArea');
         standUpload.addEventListener('dragover', e => {
             e.preventDefault();
@@ -1177,7 +1125,6 @@ foreach ($ciudadesRaw as $c) {
             }
         });
 
-        // Drag & drop para imagen hero
         const heroUpload = document.getElementById('heroUploadArea');
         heroUpload.addEventListener('dragover', e => {
             e.preventDefault();
@@ -1203,23 +1150,17 @@ foreach ($ciudadesRaw as $c) {
             }
         });
 
-        // Inicializar: mostrar primer panel de ciudad
         (function init() {
-            // ── Restaurar sección (stands/ciudades/imagenes) ──────────────────
             const savedSection = localStorage.getItem('dash_section') || 'stands';
-            const sectionBtn = document.querySelector(`.sb-item[onclick*="${savedSection}"]`);
-            switchSection(savedSection, sectionBtn);
-
-            // ── Restaurar ciudad activa ───────────────────────────────────────
+            switchSection(savedSection, null);
             const savedCity = parseInt(localStorage.getItem('dash_city') || '0');
             if (savedCity) {
-                const savedTab = document.getElementById('tab-city-' + savedCity);
-                if (savedTab) {
-                    showCity(savedCity, savedTab);
+                const tab = document.getElementById('tab-city-' + savedCity);
+                if (tab) {
+                    showCity(savedCity, tab);
                     return;
                 }
             }
-            // Fallback: primera ciudad disponible
             const firstCity = document.querySelector('.city-tab');
             if (firstCity) {
                 const cid = parseInt(firstCity.id.replace('tab-city-', ''));
@@ -1227,7 +1168,7 @@ foreach ($ciudadesRaw as $c) {
             }
         })();
 
-        // ── SIDEBAR MÓVIL ──
+        // Sidebar móvil
         const dashHamburger = document.getElementById('dashHamburger');
         const sidebarEl = document.getElementById('sidebar');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
@@ -1245,14 +1186,11 @@ foreach ($ciudadesRaw as $c) {
             dashHamburger.classList.remove('open');
             document.body.style.overflow = '';
         }
-
-        dashHamburger.addEventListener('click', (e) => {
+        dashHamburger.addEventListener('click', e => {
             e.stopPropagation();
             sidebarEl.classList.contains('open') ? closeSidebar() : openSidebar();
         });
-
         sidebarOverlay.addEventListener('click', closeSidebar);
-
         document.querySelectorAll('#sidebar .nav-item').forEach(item => {
             item.addEventListener('click', () => {
                 if (window.innerWidth <= 900) setTimeout(closeSidebar, 150);

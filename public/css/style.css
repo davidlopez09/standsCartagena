@@ -5,7 +5,6 @@
     margin: 0;
     padding: 0;
 }
-
 :root {
     --dark: #080c14;
     --dark2: #0e1520;
@@ -21,11 +20,9 @@
     --nav-height: 72px;
     --section-pad: 100px 80px;
 }
-
 html {
     scroll-behavior: smooth;
 }
-
 body {
     font-family: "DM Sans", sans-serif;
     background: var(--dark);
@@ -33,7 +30,6 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
 }
-
 /* ─── CURSOR ─── */
 .cursor {
     width: 12px;
@@ -68,7 +64,6 @@ body {
         height 0.2s,
         opacity 0.2s;
 }
-
 /* ─── NAVBAR ─── */
 nav {
     position: sticky;
@@ -88,7 +83,6 @@ nav {
 nav.scrolled {
     background: rgba(8, 12, 20, 0.97);
 }
-
 .nav-admin-btn {
     width: 38px;
     height: 38px;
@@ -98,7 +92,7 @@ nav.scrolled {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: var(--muted);
+    color: var(--gray);
     text-decoration: none;
     transition: all 0.2s;
     flex-shrink: 0;
@@ -109,7 +103,6 @@ nav.scrolled {
     color: var(--orange);
     transform: translateY(-1px);
 }
-
 .logo {
     display: flex;
     align-items: center;
@@ -146,7 +139,6 @@ nav.scrolled {
     letter-spacing: 3px;
     text-transform: uppercase;
 }
-
 .nav-links {
     display: flex;
     gap: 32px;
@@ -177,7 +169,6 @@ nav.scrolled {
 .nav-links a:hover::after {
     width: 100%;
 }
-
 .nav-cta {
     margin-left: auto;
     background: var(--orange);
@@ -201,7 +192,6 @@ nav.scrolled {
     box-shadow: 0 8px 30px var(--orange-glow);
     background: var(--orange2);
 }
-
 /* ─── TICKER ─── */
 .ticker-wrap {
     background: linear-gradient(90deg, var(--orange), #d4380d);
@@ -235,7 +225,6 @@ nav.scrolled {
         transform: translateX(-50%);
     }
 }
-
 /* ─── HERO ─── */
 .hero {
     position: relative;
@@ -313,7 +302,6 @@ nav.scrolled {
         transform: translate(10px, -30px) scale(0.95);
     }
 }
-
 .hero-grid-overlay {
     position: absolute;
     inset: 0;
@@ -325,7 +313,6 @@ nav.scrolled {
     background-size: 60px 60px;
     mask-image: radial-gradient(ellipse at 20% 50%, transparent 30%, black 100%);
 }
-
 .hero-content {
     position: relative;
     z-index: 2;
@@ -420,7 +407,6 @@ nav.scrolled {
     color: var(--orange);
     transform: translateY(-2px);
 }
-
 .hero-stats {
     display: flex;
     gap: 40px;
@@ -444,12 +430,10 @@ nav.scrolled {
     text-transform: uppercase;
     margin-top: 4px;
 }
-
 .hero-image {
     position: relative;
     flex-shrink: 0;
     width: 55%;
-    max-width: 780px;
     z-index: 2;
     display: flex;
     align-items: center;
@@ -462,7 +446,6 @@ nav.scrolled {
     display: block;
     filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6));
 }
-
 @keyframes slideUp {
     from {
         opacity: 0;
@@ -483,12 +466,10 @@ nav.scrolled {
         transform: translateX(0);
     }
 }
-
 /* ─── SECTION SHARED ─── */
 section {
     padding: var(--section-pad);
 }
-
 .section-eyebrow {
     display: inline-flex;
     align-items: center;
@@ -507,7 +488,6 @@ section {
     height: 1.5px;
     background: var(--orange);
 }
-
 .section-title {
     font-family: "Bebas Neue", sans-serif;
     font-size: 56px;
@@ -525,7 +505,6 @@ section {
     max-width: 600px;
     font-weight: 300;
 }
-
 /* ─── MARQUEE BRANDS ─── */
 .marquee-section {
     background: var(--dark2);
@@ -557,7 +536,6 @@ section {
     color: var(--orange);
     flex-shrink: 0;
 }
-
 /* ─── TABS SECTION ─── */
 .tabs-section {
     background: var(--dark);
@@ -571,7 +549,6 @@ section {
     margin: 0 auto;
     text-align: center;
 }
-
 .tabs-nav {
     display: flex;
     justify-content: center;
@@ -616,17 +593,14 @@ section {
         width 0.35s ease;
     box-shadow: 0 4px 20px var(--orange-glow);
     z-index: 0;
-    /* Visible por defecto en el primer botón */
     width: 33.33%;
 }
-
 .tab-panel {
     display: none;
 }
 .tab-panel.active {
     display: block;
 }
-
 .city-hero {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -665,7 +639,6 @@ section {
     color: var(--orange);
     flex-shrink: 0;
 }
-
 /* VENUE LIST */
 .venues-grid {
     display: grid;
@@ -710,7 +683,6 @@ section {
     color: var(--white);
     line-height: 1.4;
 }
-
 /* PRODUCTS GRID */
 .products-section {
     margin-top: 80px;
@@ -733,7 +705,6 @@ section {
     height: 1px;
     background: rgba(255, 255, 255, 0.08);
 }
-
 .products-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -747,7 +718,6 @@ section {
     transition: all 0.35s ease;
     cursor: pointer;
     position: relative;
-    group: true;
 }
 .product-card:hover {
     transform: translateY(-8px);
@@ -817,15 +787,6 @@ section {
     color: var(--white);
     margin-bottom: 6px;
 }
-.product-price {
-    font-size: 13px;
-    color: var(--gray);
-}
-.product-price strong {
-    color: var(--white);
-    font-size: 14px;
-}
-
 /* ─── PROCESS SECTION ─── */
 .process-section {
     background: radial-gradient(ellipse at center bottom, rgba(26, 58, 255, 0.12) 0%, transparent 70%), var(--dark2);
@@ -835,7 +796,6 @@ section {
     text-align: center;
     margin-bottom: 80px;
 }
-
 .process-steps {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -861,7 +821,6 @@ section {
     background: rgba(26, 58, 255, 0.5);
     border-radius: 50%;
 }
-
 .step-card {
     background: var(--dark3);
     border: 1px solid rgba(255, 255, 255, 0.06);
@@ -885,7 +844,6 @@ section {
 .step-card:nth-child(4) {
     animation-delay: 0.3s;
 }
-
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -896,7 +854,6 @@ section {
         transform: translateY(0);
     }
 }
-
 .step-num {
     font-family: "Bebas Neue", sans-serif;
     font-size: 64px;
@@ -936,7 +893,6 @@ section {
     color: var(--gray);
     font-weight: 300;
 }
-
 /* ─── WHY US ─── */
 .why-section {
     padding: 100px 80px;
@@ -1010,7 +966,6 @@ section {
     color: var(--gray);
     font-weight: 300;
 }
-
 .why-content .section-subtitle {
     margin-bottom: 40px;
 }
@@ -1039,7 +994,6 @@ section {
     letter-spacing: 1.5px;
     margin-top: 4px;
 }
-
 /* ─── BLOG ─── */
 .blog-section {
     padding: 100px 80px;
@@ -1054,7 +1008,6 @@ section {
 .blog-header .btn-secondary {
     margin-bottom: 4px;
 }
-
 .blog-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1147,7 +1100,6 @@ section {
     stroke: var(--white);
     stroke-width: 2;
 }
-
 /* ─── CTA BANNER ─── */
 .cta-section {
     padding: 80px;
@@ -1200,7 +1152,6 @@ section {
     z-index: 1;
     flex-shrink: 0;
 }
-
 /* ─── FOOTER ─── */
 footer {
     background: var(--dark2);
@@ -1252,7 +1203,6 @@ footer {
     flex-direction: column;
     gap: 12px;
 }
-
 .email-link {
     display: inline-flex;
     align-items: center;
@@ -1318,7 +1268,6 @@ footer {
     height: 15px;
     fill: var(--white);
 }
-
 /* ─── WHATSAPP FAB ─── */
 .whatsapp-fab {
     position: fixed;
@@ -1362,7 +1311,6 @@ footer {
             0 0 0 12px rgba(37, 211, 102, 0);
     }
 }
-
 /* ─── SCROLL ANIMATIONS ─── */
 .reveal {
     opacity: 0;
@@ -1410,9 +1358,36 @@ footer {
     transition-delay: 0.4s;
 }
 
-/* ─── RESPONSIVE ─── */
+/* ═══════════════════════════════════════════════════════
+   SECCIÓN MODALIDAD (id_modalidad = 1)
+   ═══════════════════════════════════════════════════════ */
+.modalidad-section {
+    background: radial-gradient(ellipse at 50% 0%, rgba(240, 90, 26, 0.1) 0%, transparent 65%), var(--dark2);
+    padding: 100px 80px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+.modalidad-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 240px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--orange), transparent);
+    border-radius: 2px;
+}
+.modalidad-header {
+    text-align: center;
+    margin-bottom: 56px;
+}
+.modalidad-header .section-subtitle {
+    margin: 0 auto;
+}
 
-/* Tablets grandes (1200px) */
+/* ─── RESPONSIVE ─── */
 @media (max-width: 1200px) {
     :root {
         --section-pad: 80px 60px;
@@ -1435,9 +1410,10 @@ footer {
     .process-connector {
         display: none;
     }
+    .modalidad-section {
+        padding: 80px 60px;
+    }
 }
-
-/* Tablets (1024px) */
 @media (max-width: 1024px) {
     :root {
         --section-pad: 70px 40px;
@@ -1490,16 +1466,15 @@ footer {
     footer {
         padding: 60px 40px 32px;
     }
+    .modalidad-section {
+        padding: 70px 40px;
+    }
 }
-
-/* Tablets pequeñas / landscape móvil (768px) */
 @media (max-width: 768px) {
     :root {
         --section-pad: 60px 24px;
         --nav-height: 64px;
     }
-
-    /* NAV */
     nav {
         padding: 0 20px;
         gap: 12px;
@@ -1525,8 +1500,6 @@ footer {
         letter-spacing: 0.5px;
         margin-left: auto;
     }
-
-    /* HERO */
     .hero {
         flex-direction: column;
         padding: 40px 24px 0;
@@ -1570,16 +1543,12 @@ footer {
     .stat-item .num {
         font-size: 34px;
     }
-
-    /* SECTION TITLES */
     .section-title {
         font-size: 40px;
     }
     .section-subtitle {
         font-size: 14px;
     }
-
-    /* TABS */
     .tabs-section {
         padding: 60px 24px;
     }
@@ -1617,8 +1586,6 @@ footer {
         grid-template-columns: 1fr 1fr;
         gap: 14px;
     }
-
-    /* PROCESS */
     .process-section {
         padding: 60px 24px;
     }
@@ -1639,8 +1606,6 @@ footer {
     .step-title {
         font-size: 15px;
     }
-
-    /* WHY US */
     .why-section {
         padding: 60px 24px;
     }
@@ -1660,8 +1625,6 @@ footer {
     .why-big-num {
         font-size: 180px;
     }
-
-    /* BLOG */
     .blog-section {
         padding: 60px 24px;
     }
@@ -1674,8 +1637,6 @@ footer {
         grid-template-columns: 1fr;
         gap: 20px;
     }
-
-    /* CTA */
     .cta-section {
         flex-direction: column;
         text-align: center;
@@ -1694,8 +1655,6 @@ footer {
         width: 100%;
         justify-content: center;
     }
-
-    /* FOOTER */
     footer {
         padding: 50px 24px 24px;
     }
@@ -1719,15 +1678,17 @@ footer {
         gap: 16px;
         text-align: center;
     }
+    .modalidad-section {
+        padding: 60px 24px;
+    }
+    .modalidad-header {
+        margin-bottom: 40px;
+    }
 }
-
-/* Móviles (480px) */
 @media (max-width: 480px) {
     :root {
         --nav-height: 60px;
     }
-
-    /* NAV */
     nav {
         padding: 0 16px;
     }
@@ -1743,8 +1704,6 @@ footer {
         font-size: 9px;
         padding: 7px 12px;
     }
-
-    /* HERO */
     .hero {
         padding: 30px 16px 0;
     }
@@ -1766,16 +1725,12 @@ footer {
     .stat-item .label {
         font-size: 9px;
     }
-
-    /* SECTION */
     .section-title {
         font-size: 34px;
     }
     .section-eyebrow {
         font-size: 9px;
     }
-
-    /* TABS */
     .tab-btn {
         font-size: 9px;
         padding: 10px 10px;
@@ -1793,16 +1748,12 @@ footer {
     .products-section {
         margin-top: 40px;
     }
-
-    /* PROCESS */
     .process-steps {
         grid-template-columns: 1fr;
     }
     .step-num {
         font-size: 48px;
     }
-
-    /* WHY */
     .why-stat-row {
         flex-direction: column;
         gap: 12px;
@@ -1822,21 +1773,15 @@ footer {
         height: 40px;
         font-size: 18px;
     }
-
-    /* CTA */
     .cta-title {
         font-size: 32px;
     }
     .cta-sub {
         font-size: 13px;
     }
-
-    /* FOOTER */
     .footer-col {
         min-width: 100%;
     }
-
-    /* WHATSAPP FAB */
     .whatsapp-fab {
         bottom: 16px;
         right: 16px;
@@ -1847,9 +1792,10 @@ footer {
         width: 24px;
         height: 24px;
     }
+    .modalidad-section {
+        padding: 50px 16px;
+    }
 }
-
-/* Móviles muy pequeños (360px) */
 @media (max-width: 360px) {
     .hero-title {
         font-size: 34px;
@@ -1873,19 +1819,10 @@ footer {
     }
 }
 
-/* -------------------------------
----------CIUDADES-----------------
---------------------------------- */
-/* ═══════════════════════════════════════
-   DROPDOWN CIUDADES — agregar al final de style.css
-   ═══════════════════════════════════════ */
-
-/* Contenedor del dropdown */
+/* ─── DROPDOWN CIUDADES ─── */
 .nav-dropdown {
     position: relative;
 }
-
-/* Botón trigger */
 .nav-dropdown-trigger {
     background: transparent;
     border: none;
@@ -1920,8 +1857,6 @@ footer {
 .nav-dropdown-trigger[aria-expanded="true"]::after {
     width: 100%;
 }
-
-/* Flecha animada */
 .dropdown-arrow {
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     flex-shrink: 0;
@@ -1929,8 +1864,6 @@ footer {
 .nav-dropdown-trigger[aria-expanded="true"] .dropdown-arrow {
     transform: rotate(180deg);
 }
-
-/* Panel del menú */
 .nav-dropdown-menu {
     position: absolute;
     top: calc(100% + 20px);
@@ -1956,8 +1889,6 @@ footer {
         0 0 0 1px rgba(255, 255, 255, 0.04),
         inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
-
-/* Brillo superior decorativo */
 .dropdown-glow {
     position: absolute;
     top: -1px;
@@ -1968,23 +1899,13 @@ footer {
     background: linear-gradient(90deg, transparent, rgba(240, 90, 26, 0.6), transparent);
     border-radius: 50%;
 }
-
-/* Estado visible */
-.nav-dropdown-menu.open {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
-}
-/* También abrir con aria-expanded */
+.nav-dropdown-menu.open,
 .nav-dropdown-trigger[aria-expanded="true"] + .nav-dropdown-menu {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
     transform: translateX(-50%) translateY(0);
 }
-
-/* Item del dropdown */
 .dropdown-item {
     display: flex;
     align-items: center;
@@ -2014,8 +1935,6 @@ footer {
 .dropdown-item:hover::before {
     opacity: 1;
 }
-
-/* Ícono de ciudad */
 .dropdown-item-icon {
     width: 40px;
     height: 40px;
@@ -2031,8 +1950,6 @@ footer {
     height: 18px;
     stroke: white;
 }
-
-/* Texto del item */
 .dropdown-item-body {
     flex: 1;
     display: flex;
@@ -2051,8 +1968,6 @@ footer {
     color: var(--gray);
     font-weight: 300;
 }
-
-/* Flecha del item */
 .dropdown-item-arrow {
     opacity: 0;
     transform: translateX(-4px);
@@ -2066,13 +1981,9 @@ footer {
     opacity: 1;
     transform: translateX(0);
 }
-
-/* Separador entre items */
 .dropdown-item + .dropdown-item {
     margin-top: 2px;
 }
-
-/* Hover color por ciudad */
 .dropdown-item:nth-child(2):hover {
     background: rgba(240, 90, 26, 0.08);
 }
@@ -2082,15 +1993,13 @@ footer {
 .dropdown-item:nth-child(4):hover {
     background: rgba(0, 184, 148, 0.08);
 }
-
-/* ─── RESPONSIVE dropdown ─── */
 @media (max-width: 768px) {
     .nav-dropdown {
-        display: none; /* en móvil se oculta junto con nav-links */
+        display: none;
     }
 }
 
-/* ─── HAMBURGER MENU (móvil) ─── */
+/* ─── HAMBURGER MENU ─── */
 .hamburger {
     display: none;
     flex-direction: column;
@@ -2138,8 +2047,6 @@ footer {
     transform: translateY(-7px) rotate(-45deg);
     background: var(--orange);
 }
-
-/* Panel del menú móvil */
 .mobile-menu {
     display: none;
     position: fixed;
@@ -2202,8 +2109,6 @@ footer {
     opacity: 0.4;
     flex-shrink: 0;
 }
-
-/* Submenu ciudades en móvil */
 .mobile-cities {
     background: rgba(14, 21, 32, 0.6);
     overflow: hidden;
@@ -2226,16 +2131,12 @@ footer {
 .mobile-cities a:last-child {
     border-bottom: none;
 }
-
-/* Flecha del trigger ciudades en móvil */
 .mobile-cities-arrow {
     transition: transform 0.3s ease;
 }
 .mobile-menu-item.cities-open .mobile-cities-arrow {
     transform: rotate(180deg);
 }
-
-/* CTA dentro del móvil menu */
 .mobile-menu-cta {
     padding: 16px 24px 0;
 }
@@ -2264,7 +2165,6 @@ footer {
     transform: translateY(-1px) !important;
     padding-left: 24px !important;
 }
-
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
@@ -2272,24 +2172,16 @@ footer {
     .mobile-menu {
         display: block;
     }
-    /* Ocultar CTA del nav en móvil cuando hay hamburguesa */
     .nav-cta {
         display: none;
     }
-    /* El nav-admin-btn va antes del hamburger */
     nav {
-        position: sticky; /* mantener sticky */
+        position: sticky;
     }
-}
-
-/* Ocultar admin btn en móvil */
-@media (max-width: 768px) {
     .desktop-only {
         display: none !important;
     }
 }
-
-/* Botón Ingresar en móvil — estilo secundario */
 .mobile-menu-login a {
     background: transparent !important;
     border: 1px solid rgba(255, 255, 255, 0.18) !important;

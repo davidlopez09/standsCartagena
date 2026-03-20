@@ -1,7 +1,7 @@
 <?php
 // ── Configuración de conexión ──────────────────────────────────────────────
 $host    = 'localhost';
-$dbname  = 'standscartagena';
+$dbname  = 'standscartagenas';
 $db_user = 'root';
 $db_pass = '';          // Cambia si tu MySQL tiene contraseña
 
