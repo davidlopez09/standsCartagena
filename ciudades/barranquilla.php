@@ -63,6 +63,7 @@ $stands = $stmt->fetchAll();
             <a href="../index.php#proceso">Proceso</a>
             <a href="../index.php#beneficios">¿Por qué nosotros?</a>
             <a href="../index.php#blog">Blog</a>
+            <a href="../galeria.php">Galería</a>
             <a href="cartagena.php">Cartagena</a>
             <a href="santaMarta.php">Santa Marta</a>
         </div>
@@ -83,6 +84,7 @@ $stands = $stmt->fetchAll();
         <a href="../index.php#stands">Servicios</a>
         <a href="../index.php#proceso">Proceso</a>
         <a href="../index.php#beneficios">¿Por qué nosotros?</a>
+        <a href="../galeria.php">Galería</a>
         <a href="cartagena.php">Cartagena</a>
         <a href="barranquilla.php">Barranquilla</a>
         <a href="santaMarta.php">Santa Marta</a>

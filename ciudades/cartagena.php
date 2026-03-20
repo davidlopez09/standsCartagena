@@ -14,7 +14,7 @@ function waLink(string $standNombre, string $standTipo, int $standId): string
         "¡Hola!, Estoy interesado en cotizar el siguiente stand:\n\n" .
             "*Stand:* {$standNombre}\n" .
             "*Tipo:* {$standTipo}\n\n" .
-            "🔗Ver stand: {$url}\n\n" .
+            "Ver stand: {$url}\n\n" .
             "¿Me pueden dar más información y precio?"
     );
     return 'https://wa.me/' . WA_NUMBER . '?text=' . $mensaje;
@@ -135,6 +135,7 @@ $stands = $stmt->fetchAll();
             <a href="../index.php#proceso">Proceso</a>
             <a href="../index.php#beneficios">¿Por qué nosotros?</a>
             <a href="../index.php#blog">Blog</a>
+            <a href="../galeria.php">Galería</a>
             <a href="barranquilla.php">Barranquilla</a>
             <a href="santamarta.php">Santa Marta</a>
         </div>
@@ -156,6 +157,7 @@ $stands = $stmt->fetchAll();
         <a href="../index.php#stands">Servicios</a>
         <a href="../index.php#proceso">Proceso</a>
         <a href="../index.php#beneficios">¿Por qué nosotros?</a>
+        <a href="../galeria.php">Galería</a>
         <a href="cartagena.php">Cartagena</a>
         <a href="barranquilla.php">Barranquilla</a>
         <a href="santamarta.php">Santa Marta</a>
