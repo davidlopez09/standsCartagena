@@ -11,10 +11,10 @@ function waLink(string $standNombre, string $standTipo, int $standId): string
 {
     $url     = SITE_URL . '/ciudades/santaMarta.php#stand-' . $standId;
     $mensaje = urlencode(
-        "¡Hola! 👋 Estoy interesado en cotizar el siguiente stand:\n\n" .
-            "📦 *Stand:* {$standNombre}\n" .
-            "🏷️ *Tipo:* {$standTipo}\n\n" .
-            "🔗 Ver stand: {$url}\n\n" .
+        "¡Hola!, Estoy interesado en cotizar el siguiente stand:\n\n" .
+            "*Stand:* {$standNombre}\n" .
+            "*Tipo:* {$standTipo}\n\n" .
+            "Ver stand: {$url}\n\n" .
             "¿Me pueden dar más información y precio?"
     );
     return 'https://wa.me/' . WA_NUMBER . '?text=' . $mensaje;
